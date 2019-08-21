@@ -69,7 +69,10 @@ height: 100%;
 </head>
 <body class="show-number">
 <!-- particles.js container -->
-<div id="particles-js" style="z-index: 99999;"></div>
+<div id="particles-js"></div>
+<!-- stats - count particles -->
+<div class="count-particles">
+</div>
 <div class="main">
 <h1>V88AV | 最新地址</h1>
 <div class="content">
@@ -213,7 +216,77 @@ particlesJS("particles-js", {
 },
 "retina_detect": true
 });
+/* ---- stats.js config ---- */
+var count_particles, stats, update;
+stats = new Stats;
+stats.setMode(0);
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+document.body.appendChild(stats.domElement);
+count_particles = document.querySelector('.js-count-particles');
+update = function () {
+stats.begin();
+stats.end();
+if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+}
+requestAnimationFrame(update);
+};
+requestAnimationFrame(update);
 </script>
+<style>
+/* ---- reset ---- */
+body {
+margin: 0;
+font: normal 75% Arial, Helvetica, sans-serif;
+}
+canvas {
+display: block;
+vertical-align: bottom;
+}
+/* ---- particles.js container ---- */
+#particles-js {
+position: absolute;
+width: 100%;
+height: 100%;
+background-color: #b61924;
+background-image: url("");
+background-repeat: no-repeat;
+background-size: cover;
+background-position: 50% 50%;
+}
+/* ---- stats.js ---- */
+.count-particles {
+background: #000022;
+position: absolute;
+top: 48px;
+left: 0;
+width: 80px;
+color: #13E8E9;
+font-size: .8em;
+text-align: left;
+text-indent: 4px;
+line-height: 14px;
+padding-bottom: 2px;
+font-family: Helvetica, Arial, sans-serif;
+font-weight: bold;
+}
+.js-count-particles {
+font-size: 1.1em;
+}
+#stats,
+.count-particles {
+-webkit-user-select: none;
+}
+#stats {
+border-radius: 3px 3px 0 0;
+overflow: hidden;
+}
+.count-particles {
+border-radius: 0 0 3px 3px;
+}
+</style>
 <div style="display: none;">
 <div id="histats_counter"></div>
 <script type="text/javascript">var _Hasync = _Hasync || [];
